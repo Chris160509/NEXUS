@@ -5,4 +5,5 @@ requests
 speechrecognition
 waitress
 gunicorn
-py-espeak-ng
+gtts
+pygame
