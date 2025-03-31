@@ -2,13 +2,23 @@ from flask import Flask, render_template, request
 import pyttsx3
 import random
 import json
-import os
-from espeakng import ESpeakNG  
+from gtts import gTTS  
+import os  
+import pygame  
 
-os.environ["LD_LIBRARY_PATH"] = "/opt/render/.cache"  # Forceer Render om de juiste libraries te vinden  
+def speak(text):  
+    tts = gTTS(text=text, lang="nl")  
+    tts.save("output.mp3")  
+    
+    pygame.mixer.init()  
+    pygame.mixer.music.load("output.mp3")  
+    pygame.mixer.music.play()  
+    
+    while pygame.mixer.music.get_busy():  
+        continue  
 
-esng = ESpeakNG()  
-esng.say("Hallo, Nexus werkt!")  
+speak("Hallo, Nexus werkt!")  
+ 
 
 app = Flask(__name__)
 
