@@ -1,31 +1,9 @@
 from flask import Flask, render_template, request
-import pyttsx3
 import random
 import json
-from gtts import gTTS  
 import os  
-import pygame  
-
-def speak(text):  
-    tts = gTTS(text=text, lang="nl")  
-    tts.save("output.mp3")  
-    
-    pygame.mixer.init()  
-    pygame.mixer.music.load("output.mp3")  
-    pygame.mixer.music.play()  
-    
-    while pygame.mixer.music.get_busy():  
-        continue  
-
-speak("Hallo, Nexus werkt!")  
- 
 
 app = Flask(__name__)
-
-# Initialiseer spraaksynthese (offline)
-engine = pyttsx3.init()
-engine.setProperty('rate', 150)
-engine.setProperty('voice', 'english')  # Pas aan als nodig
 
 # Onthoud de laatste 10 berichten
 gespreksgeschiedenis = []
@@ -49,12 +27,6 @@ grappige_reacties = [
     "Waarom kan een skelet niet liegen? Omdat je er zo doorheen kijkt!"
 ]
 
-# Functie om Nexus te laten spreken
-def spreken(tekst):
-    print(f"Nexus: {tekst}")
-    engine.say(tekst)
-    engine.runAndWait()
-
 @app.route("/", methods=["GET", "POST"])
 def home():
     antwoord = ""
@@ -76,13 +48,8 @@ def home():
         else:
             antwoord = "Sorry, ik weet niet het antwoord op dat."
 
-        # Laat Nexus spreken
-        spreken(antwoord)
-
     return render_template("index.html", antwoord=antwoord, user_input=user_input)
 
 if __name__ == "__main__":
-    if __name__ == "__main__":
-        from waitress import serve
-        serve(app, host="0.0.0.0", port=5000)
-
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=5000)
