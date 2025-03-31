@@ -3,6 +3,12 @@ import pyttsx3
 import random
 import json
 import os
+from espeakng import ESpeakNG  
+
+os.environ["LD_LIBRARY_PATH"] = "/opt/render/.cache"  # Forceer Render om de juiste libraries te vinden  
+
+esng = ESpeakNG()  
+esng.say("Hallo, Nexus werkt!")  
 
 app = Flask(__name__)
 
