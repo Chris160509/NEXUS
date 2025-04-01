@@ -1,4 +1,3 @@
-pip --upgrade
 flask
 beautifulsoup4
 pyttsx3
