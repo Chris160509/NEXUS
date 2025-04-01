@@ -1,7 +1,0 @@
-flask
-beautifulsoup4
-pyttsx3
-requests
-speechrecognition
-waitress
-gunicorn
