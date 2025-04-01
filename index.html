@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='generated-icon.png') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus AI</title>
+    <script>
+        // Functie om Enter-toets te detecteren en het formulier in te dienen
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("user_input").addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault(); // Zorg ervoor dat het formulier niet dubbel wordt verzonden
+                    document.getElementById("chat_form").submit(); // Verzend het formulier
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/over">Over</a></li>
+        <li><a href="/contact">Contact</a></li>
+    </ul>
+</nav>
+    <h1>Welkom bij Nexus</h1>
+    <form action="/" method="POST" id="chat_form">
+        <label for="user_input">Jij:</label><br>
+        <input type="text" id="user_input" name="user_input" value="{{ user_input }}" required><br>
+        <input type="submit" value="Verzenden">
+    </form>
+
+    {% if antwoord %}
+    <h3>Jij zei: {{ user_input }}</h3>
+    <h3>Nexus antwoordt: {{ antwoord }}</h3>
+    {% endif %}
+</body>
+</html>
